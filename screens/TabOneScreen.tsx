@@ -10,7 +10,9 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Budget Main page</Text>
 
-      <Categories></Categories>
+      <Categories title={'Budgeting Categories'}>
+
+      </Categories>
       
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       
