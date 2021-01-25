@@ -22,6 +22,7 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Budget Main page</Text>
 
+      <Income/>
       <Categories title={'Budgeting Categories'}>
 
       </Categories>
