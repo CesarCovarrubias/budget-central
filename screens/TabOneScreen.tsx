@@ -26,7 +26,7 @@ export default function TabOneScreen() {
       <Income style={styles.container}/>
         <Button 
           title={'Do stuff'}
-          onPress={() => console.log('Yay you can do stuff!')} //change-income() call here
+          onPress={() => console.log('yay you can do stuff')} //change-income() call here
         />
 
       <Categories title={'Budgeting Categories'}/>
