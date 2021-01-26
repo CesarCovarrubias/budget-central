@@ -1,26 +1,77 @@
 import * as React from 'react';
-import { StyleSheet, ScrollView, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, FlatList, Text, View } from 'react-native';
 
-export default function Categories({ title }: { title: string }) {
+// multiply the id with total money to get that categories budget
+const DATA = [
+  {
+    title: 'Savings',
+    id: '0.20'
+  },
+  {
+    title: 'Recreation',
+    id: '0.15'
+  },
+  {
+    title: 'Personal',
+    id: '0.10'
+  },
+  {
+    title: 'Housing',
+    id: '0.30'
+  },
+  {
+    title: 'Food',
+    id: '0.10'
+  },
+  {
+    title: 'Insurance',
+    id: '0.05'
+  },
+  {
+    title: 'Medical',
+    id: '0.05'
+  },
+  {
+    title: 'Transport',
+    id: '0.05'
+  }
+]
+
+const Item = ({title}) => {
+  return(
+    <View>
+      <Text>{title}</Text>
+    </View>
+  )
+}
+
+export default function Categories({ title, income }: { title: string, income: number }) {
+    let money = income;
+
+    const renderItem = ({ item }) => (
+      <Item title={item.title} />
+    );
+
     return (
         <View>
             <Text style={styles.container}>
                 {title}
+                {income}
+                
             </Text>
 
-            <ScrollView style={styles.contentContainer}>
-              <Button 
-                title={'Change my income'}
-    
-                onPress={() => console.log('Yay you can change income')}
+            <FlatList 
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={item=>item.id}
               />
-            </ScrollView>
+              
+            
 
         </View>
     );
-} // adding buttons insides Scrollview
-  //buttons - (change income) (purchases)
-
+} // adding buttons inside Scrollview
+    // buttons - (change income) (purchases) (view )
 
 const styles = StyleSheet.create({
     container: {

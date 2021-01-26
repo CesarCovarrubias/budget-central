@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, Button } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import Categories from '../components/Categories';
@@ -22,23 +22,31 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Budget Main page</Text>
 
-      <Income/>
-      <Categories title={'Budgeting Categories'}>
+      <Income style={styles.container}/>
+        <Button 
+          title={'Do stuff'}
+          onPress={() => console.log('Yay you can do stuff!')} //change-income() call here
+        />
 
-      </Categories>
+      <Categories title={'Budgeting Categories'}/>
+
+      
       
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  infoContainer:{
+    flex: 1,
+    alightItems: 'left',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   title: {
     fontSize: 20,
