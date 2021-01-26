@@ -16,7 +16,8 @@ const Income = (props) => {
   )
 }
 
-
+//date time testing
+let date : Date = new Date()
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>

@@ -40,10 +40,13 @@ const DATA = [
 const Item = ({title}) => {
   return(
     <View>
-      <Text>{title}</Text>
+      <Text style = {styles.border}>{title}</Text>
+      &nbsp;&nbsp;&nbsp;
     </View>
   )
 }
+
+
 
 export default function Categories({ title, income }: { title: string, income: number }) {
     let money = income;
@@ -54,6 +57,7 @@ export default function Categories({ title, income }: { title: string, income: n
 
     return (
         <View>
+        
             <Text style={styles.container}>
                 {title}
                 {income}
@@ -78,6 +82,15 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+    },
+
+    border: {
+      textAlign : 'center',
+      width:  70,
+      height:  20,
+      borderRadius: 5,
+      backgroundColor : '#479EEE',
+
     },
     title: {
       fontSize: 20,
