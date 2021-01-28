@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, TextInput, Button } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -6,6 +8,29 @@ import Categories from '../components/Categories';
 import { Text, View } from '../components/Themed';
 import Finance from '../components/Categories';
 import { constructor } from 'react';
+import TabTwoScreen from './TabTwoScreen';
+import Navigation from '../navigation';
+
+
+//nav stuff------------------------------------------------------------------
+//currently each time the project is saved
+//it will say page not found
+//working on solution
+const Stack = createStackNavigator();
+const MyStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={TabOneScreen}
+        />
+        <Stack.Screen name="Profile" component={TabTwoScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+//nav stuff------------------------------------------------------------------
 
 
 const Income = (props) => {
@@ -44,7 +69,7 @@ export default function TabOneScreen() {
       <Income style={styles.container}/>
         <Button 
           title={'Do stuff'}
-          onPress={() => monthlyIncome()} //change-income() call here
+          onPress={() => Navigation.navigate('Profile')} //change-income() call here
         />
 
       <Categories title={'Budgeting Categories'}/>
