@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, TextInput, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import Categories from '../components/Categories';
@@ -10,6 +11,7 @@ import Finance from '../components/Categories';
 import { constructor } from 'react';
 import TabTwoScreen from './TabTwoScreen';
 import Navigation from '../navigation';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 
 //nav stuff------------------------------------------------------------------
@@ -32,22 +34,6 @@ const MyStack = () => {
 };
 //nav stuff------------------------------------------------------------------
 
-
-const Income = (props) => {
-  const [enteredAmount] = React.useState(0);
-  return (
-    <TextInput
-      keyboardType = {'number-pad'}
-      editable
-      placeholder = {'0.00'}
-      maxLength={15}
-     // onSubmitEditing = {} Im thinking about using this as the trigger for saving the value to a variable
-
-    />
-  )
-}
-
-
 function monthlyIncome(){
   //early implementation of adding the income value to the current budget based on Date
   //assuming a biweekly pay period
@@ -62,23 +48,75 @@ function monthlyIncome(){
 }
 
 export default function TabOneScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Budget Main page</Text>
 
-      <Income style={styles.container}/>
+  const [ money, setMoney ] = useState<number>(0); 
+  const [ showModal, setShowModal ] = useState<boolean>(false);
+
+  const Income = (props) => {
+    return (
+      <TextInput
+        keyboardType = {'numeric'}
+        placeholder = {'0.00'}
+        maxLength={15}
+        onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+          setMoney(parseFloat(e.nativeEvent.text))
+        }}
+      />
+    )
+  }
+  
+  return (
+    <SafeAreaView style={{ flex:1 }}>
+
+      <View style={styles.container}>
+
+        <Text style={styles.title}>
+          Budget Main page
+        </Text>
+        
+        <Text >
+          {'Your current income:  $ '+ money}
+        </Text>
+
+        <Modal 
+          animationType="slide"  
+          transparent = {true}
+          visible = {showModal}
+          onRequestClose={() => {
+            console.log("Modal has been closed.")
+          }}
+        >
+          
+          <View style={styles.modal}> 
+            <Text>
+              {'Greetings, change your income here.'}
+            </Text>
+            
+            <Income/>
+            
+            <Button
+            title={'Close Modal'}
+            onPress={() => setShowModal(!showModal)}
+            />
+
+          </View>
+
+        </Modal>
+
         <Button 
-          title={'Do stuff'}
-          onPress={() => Navigation.navigate('Profile')} //change-income() call here
+          title={'Change Income/Open Modal'}
+          onPress={() => setShowModal(!showModal)}
         />
 
-      <Categories title={'Budgeting Categories'}/>
+        <Categories 
+          title={'Budgeting Categories'}
+          income={0.00} //place holder, will be users current funds
+        />
 
-      
-      
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      
-    </View>
+        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+        
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -91,6 +129,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  modal: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#D3D3D3',
+    padding: 100,
   },
   title: {
     fontSize: 20,

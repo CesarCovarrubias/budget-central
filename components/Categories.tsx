@@ -52,7 +52,9 @@ export default function Categories({ title, income }: { title: string, income: n
     let money = income;
 
     const renderItem = ({ item }) => (
-      <Item title={item.title} />
+      <Item 
+        title={item.title} 
+      />
     );
 
     return (
@@ -68,14 +70,14 @@ export default function Categories({ title, income }: { title: string, income: n
               data={DATA}
               renderItem={renderItem}
               keyExtractor={item=>item.id}
-              />
+            />
               
             
 
         </View>
     );
-} // adding buttons inside Scrollview
-    // buttons - (change income) (purchases) (view )
+} 
+
 
 const styles = StyleSheet.create({
     container: {
