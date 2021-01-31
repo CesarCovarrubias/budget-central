@@ -67,54 +67,41 @@ export default function TabOneScreen() {
   
   return (
     <SafeAreaView style={{ flex:1 }}>
-
       <View style={styles.container}>
-
         <Text style={styles.title}>
-          Budget Main page
+          {'Budget Main page'}
         </Text>
-        
         <Text >
           {'Your current income:  $ '+ money}
         </Text>
-
         <Modal 
-          animationType="slide"  
+          animationType={"slide"}  
           transparent = {true}
           visible = {showModal}
           onRequestClose={() => {
             console.log("Modal has been closed.")
           }}
         >
-          
           <View style={styles.modal}> 
             <Text>
               {'Greetings, change your income here.'}
             </Text>
-            
             <Income/>
-            
             <Button
             title={'Close Modal'}
             onPress={() => setShowModal(!showModal)}
             />
-
           </View>
-
         </Modal>
-
         <Button 
           title={'Change Income/Open Modal'}
           onPress={() => setShowModal(!showModal)}
         />
-
         <Categories 
           title={'Budgeting Categories'}
-          income={0.00} //place holder, will be users current funds
+          income={money}
         />
-
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        
       </View>
     </SafeAreaView>
   );
@@ -123,7 +110,7 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   infoContainer:{
     flex: 1,
-    alightItems: 'left',
+    alignItems: 'flex-start',
   },
   container: {
     flex: 1,

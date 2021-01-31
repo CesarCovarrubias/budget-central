@@ -4,36 +4,36 @@ import { StyleSheet, FlatList, Text, View } from 'react-native';
 // multiply the id with total money to get that categories budget
 const DATA = [
   {
-    title: 'Savings',
-    id: '0.20'
+    id: 'Savings',
+    multiplier: '0.20'
   },
   {
-    title: 'Recreation',
-    id: '0.15'
+    id: 'Recreation',
+    multiplier: '0.15'
   },
   {
-    title: 'Personal',
-    id: '0.10'
+    id: 'Personal',
+    multiplier: '0.10'
   },
   {
-    title: 'Housing',
-    id: '0.30'
+    id: 'Housing',
+    multiplier: '0.30'
   },
   {
-    title: 'Food',
-    id: '0.10'
+    id: 'Food',
+    multiplier: '0.10'
   },
   {
-    title: 'Insurance',
-    id: '0.05'
+    id: 'Insurance',
+    multiplier: '0.05'
   },
   {
-    title: 'Medical',
-    id: '0.05'
+    id: 'Medical',
+    multiplier: '0.05'
   },
   {
-    title: 'Transport',
-    id: '0.05'
+    id: 'Transport',
+    multiplier: '0.05'
   }
 ]
 
@@ -41,39 +41,29 @@ const Item = ({title}) => {
   return(
     <View>
       <Text style = {styles.border}>{title}</Text>
-      &nbsp;&nbsp;&nbsp;
     </View>
   )
 }
-
-
 
 export default function Categories({ title, income }: { title: string, income: number }) {
     let money = income;
 
     const renderItem = ({ item }) => (
       <Item 
-        title={item.title} 
+        title={item.id} 
       />
     );
 
     return (
-        <View>
-        
+        <View style={styles.container}>
             <Text style={styles.container}>
                 {title}
-                {income}
-                
             </Text>
-
             <FlatList 
               data={DATA}
               renderItem={renderItem}
               keyExtractor={item=>item.id}
             />
-              
-            
-
         </View>
     );
 } 
