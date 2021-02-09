@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { constructor } from 'react';
 import { StyleSheet, TextInput, Button } from 'react-native';
-
+import Dropmenu from '../components/Dropmenu'
 import EditScreenInfo from '../components/EditScreenInfo';
 import { MonoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
@@ -11,8 +11,9 @@ export default function TabTwoScreen() {
   return (
     //a lot of what is on this second screen is just for testing purposes
     <View style={styles.container}>
-      <UselessTextInput style={styles.container}/>
       <Text style={styles.title}>My Finance</Text>
+      <Dropmenu></Dropmenu>
+      <UselessTextInput></UselessTextInput>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
     </View>
