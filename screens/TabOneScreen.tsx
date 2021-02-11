@@ -51,18 +51,11 @@ export default function TabOneScreen() {
 
   const [ money, setMoney ] = useState<number>(0); 
   const [ showModal, setShowModal ] = useState<boolean>(false);
+  const [ showTransaction, setShowTransaction ] = useState<boolean>(true);
 
-  const Income = (props) => {
-    return (
-      <TextInput
-        keyboardType = {'numeric'}
-        placeholder = {'0.00'}
-        maxLength={15}
-        onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
-          setMoney(parseFloat(e.nativeEvent.text))
-        }}
-      />
-    )
+  const handleTransaction = () => {
+    //create Transaction component and pass props:
+    //onClick, transaction number
   }
   
   return (
@@ -86,7 +79,14 @@ export default function TabOneScreen() {
             <Text>
               {'Greetings, change your income here.'}
             </Text>
-            <Income/>
+            <TextInput
+              keyboardType = {'numeric'}
+              placeholder = {'0.00'}
+              maxLength={15}
+              onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+                setMoney(parseFloat(e.nativeEvent.text))
+              }}
+            />
             <Button
             title={'Close Modal'}
             onPress={() => setShowModal(!showModal)}

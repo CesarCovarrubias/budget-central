@@ -2,58 +2,36 @@ import { useLinkProps } from '@react-navigation/native';
 import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
+import { DATA } from '../data/data' 
 
-// multiply the id with total money to get that categories budget
-const DATA = [
-  {
-    id: 'Savings',
-    multiplier: '0.20'
-  },
-  {
-    id: 'Recreation',
-    multiplier: '0.15'
-  },
-  {
-    id: 'Personal',
-    multiplier: '0.10'
-  },
-  {
-    id: 'Housing',
-    multiplier: '0.30'
-  },
-  {
-    id: 'Food',
-    multiplier: '0.10'
-  },
-  {
-    id: 'Insurance',
-    multiplier: '0.05'
-  },
-  {
-    id: 'Medical',
-    multiplier: '0.05'
-  },
-  {
-    id: 'Transport',
-    multiplier: '0.05'
-  }
-]
+interface CatProps {
+  title: string;
+  income: number;
+}
 
-const Item = ({catName, budgetAmount}) => {
+interface ItemProps {
+  catName: string;
+  budgetAmount: number;
+}
+
+const Item = (props: ItemProps) => {
   return(
     <View style = {styles.border}>
-        <Text style={{textAlign:'left'}}>{catName} {budgetAmount}</Text>
+        <Text style={{textAlign:'left'}}>
+          {props.catName} 
+          {props.budgetAmount}
+        </Text>
     </View>
   )
 }
 
-export default function Categories({ title, income }: { title: string, income: number }) {
+export default function Categories(props: CatProps) {
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item  }) => (
     
     <Item  
       catName={item.id}
-      budgetAmount={item.multiplier * income}
+      budgetAmount={item.multiplier * props.income}
     />
   );
 
@@ -70,7 +48,7 @@ export default function Categories({ title, income }: { title: string, income: n
   return (
       <View style={styles.container}>
           <Text style={styles.container}>
-              {title}
+              {props.title}
           </Text>
           <FlatList 
             data={DATA}
