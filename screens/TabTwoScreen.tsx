@@ -13,28 +13,40 @@ export default function TabTwoScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>My Finance</Text>
       <Dropmenu></Dropmenu>
-      <UselessTextInput></UselessTextInput>
+      <AmountSpent></AmountSpent>
+      <Finalize></Finalize>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
     </View>
   );
 }
 
-export function UselessTextInput() {
+const AmountSpent = () => {
+  const [value,onChangeText] = React.useState('$ 0.00');
+
   return (
     <TextInput
       
       style={{ 
-    	height: 40, 
+    	height: 20, 
     	borderColor: 'gray', 
-      borderWidth: 1,
-      
-      
-    }}
-      onSubmitEditing={text => console.log("save value to variable once we know how")}   
+      borderWidth: 1,}}
+      onChangeText = {Text => onChangeText(Text)}
+      keyboardType={'number-pad'}
+      value = {value}    
     />
   );
   
+}
+
+const Finalize = () => {
+return(
+  <Button
+    onPress={() => console.log('this will log the purchase and deduct from the budget')}
+    title = 'Submit'
+  />
+)
+
 }
 
 
