@@ -39,6 +39,25 @@ const AmountSpent = () => {
   
 }
 
+
+const ItemPurchased = () => {
+  const [item,onChangeText] = React.useState('Purchase');
+
+  return (
+    <TextInput
+      
+      style={{ 
+    	height: 20, 
+    	borderColor: 'gray', 
+      borderWidth: 1,}}
+      onChangeText = {Text => onChangeText(Text)}
+      value = {item}    
+    />
+  );
+  
+}
+
+
 const Finalize = () => {
 return(
   <Button
