@@ -19,7 +19,7 @@ const Item = (props: ItemProps) => {
     <View style = {styles.border}>
         <Text style={{textAlign:'left'}}>
           {props.catName} 
-          {props.budgetAmount}
+          {': $'+ props.budgetAmount}
         </Text>
     </View>
   )
@@ -28,12 +28,15 @@ const Item = (props: ItemProps) => {
 export default function Categories(props: CatProps) {
 
   const renderItem = ({ item  }) => (
-    
     <Item  
       catName={item.id}
-      budgetAmount={item.multiplier * props.income}
+      budgetAmount={precision(item.multiplier * props.income) }
     />
   );
+
+  const precision = (number: any) => {
+    return number.toFixed(2)
+  };
 
   const Separator = () => (
     <View style={{
@@ -47,8 +50,9 @@ export default function Categories(props: CatProps) {
 
   return (
       <View style={styles.container}>
-          <Text style={styles.container}>
-              {props.title}
+          <Text style={styles.title}>
+              {props.title+'\n'}
+              {'----------------------------'}
           </Text>
           <FlatList 
             data={DATA}
@@ -64,19 +68,20 @@ export default function Categories(props: CatProps) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'center',
     },
     border: {
       textAlign : 'center',
-      width:  130, //70
-      height:  20, //20
+      width:  145, 
+      height:  20, 
       borderRadius: 5,
-      backgroundColor : '#479EEE',
+      backgroundColor : '#0cad9a',
     },
     title: {
-      fontSize: 20,
+      fontSize: 14,
       fontWeight: 'bold',
+      textAlign: 'left'
     },
     contentContainer: {
       paddingVertical: 20

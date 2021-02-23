@@ -53,11 +53,6 @@ export default function TabOneScreen() {
   const [ showModal, setShowModal ] = useState<boolean>(false);
   const [ showTransaction, setShowTransaction ] = useState<boolean>(true);
 
-  const handleTransaction = () => {
-    //create Transaction component and pass props:
-    //onClick, transaction number
-  }
-  
   return (
     <SafeAreaView style={{ flex:1 }}>
       <View style={styles.container}>
@@ -94,11 +89,11 @@ export default function TabOneScreen() {
           </View>
         </Modal>
         <Button 
-          title={'Change Income/Open Modal'}
+          title={'Change Income'}
           onPress={() => setShowModal(!showModal)}
         />
         <Categories 
-          title={'Budgeting Categories'}
+          title={'Recommended budget based on your income'}
           income={money}
         />
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -120,7 +115,7 @@ const styles = StyleSheet.create({
   modal: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#D3D3D3',
+    backgroundColor: '#f9bf52',
     padding: 100,
   },
   title: {
