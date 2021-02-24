@@ -52,7 +52,7 @@ export default function App() {
 
   const toggling = () => setIsOpen(!isOpen);
 
-  const onOptionClicked = value => () => {
+  const onOptionClicked: (value:any) => () => {
     setSelectedOption(value);
     setIsOpen(false);
     console.log(selectedOption);
@@ -65,7 +65,7 @@ export default function App() {
         <DropDownHeader onClick={toggling}>
           {selectedOption || "Personal"}
         </DropDownHeader>
-        {isOpen && (
+        {isOpen ? (
           <DropDownListContainer>
             <DropDownList>
               {options.map(option => (
@@ -75,7 +75,7 @@ export default function App() {
               ))}
             </DropDownList>
           </DropDownListContainer>
-        )}
+        ) : []}
       </DropDownContainer>
     </Main>
   );

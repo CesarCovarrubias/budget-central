@@ -12,11 +12,10 @@ export default function TabTwoScreen() {
     //a lot of what is on this second screen is just for testing purposes
     <View style={styles.container}>
       <Text style={styles.title}>My Finance</Text>
-      <Dropmenu></Dropmenu>
       <AmountSpent></AmountSpent>
       <Finalize></Finalize>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      
     </View>
   );
 }
@@ -26,11 +25,10 @@ const AmountSpent = () => {
 
   return (
     <TextInput
-      
       style={{ 
     	height: 20, 
     	borderColor: 'gray', 
-      borderWidth: 1,}}
+      borderWidth: 1}}
       onChangeText = {Text => onChangeText(Text)}
       keyboardType={'number-pad'}
       value = {value}    
@@ -45,11 +43,10 @@ const ItemPurchased = () => {
 
   return (
     <TextInput
-      
       style={{ 
     	height: 20, 
     	borderColor: 'gray', 
-      borderWidth: 1,}}
+      borderWidth: 1}}
       onChangeText = {Text => onChangeText(Text)}
       value = {item}    
     />

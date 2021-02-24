@@ -40,7 +40,7 @@ function monthlyIncome(){
   //not perfect as this isnt how pay periods always work but its a start
   let date : Date = new Date()
   let day = date.getDate()
-  if (day % 9 == 0 && day > 7)
+  if (day % 9 === 0 ? day > 7: [])
   {
     console.log('Its pay day')
     //this will eventually add to/recalculate the budget every 7 days
