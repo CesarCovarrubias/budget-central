@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { constructor } from 'react';
 import { StyleSheet, TextInput, Button } from 'react-native';
-import Dropmenu from '../components/Dropmenu'
+import { Dropmenu } from '../components/Dropmenu';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { MonoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
@@ -15,10 +15,11 @@ export default function TabTwoScreen() {
       <AmountSpent></AmountSpent>
       <Finalize></Finalize>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      
     </View>
+    
   );
 }
+
 
 const AmountSpent = () => {
   const [value,onChangeText] = React.useState('$ 0.00');
@@ -53,6 +54,7 @@ const ItemPurchased = () => {
   );
   
 }
+
 
 
 const Finalize = () => {

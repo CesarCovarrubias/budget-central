@@ -1,4 +1,89 @@
-import React, { useState } from "react";
+//I installed "npm install react-native-dropdown-picker --save" & "npm install --save react-native-vector-icons" & "npm i --save-dev @types/react-native-vector-icons"
+//Git page: https://github.com/hossein-zare/react-native-dropdown-picker#readme
+
+
+import DropDownPicker from 'react-native-dropdown-picker';
+import { constructor, useState } from 'react';
+import { Text, View } from 'react-native';
+import * as React from 'react';
+import { renderByOrder } from '../recharts/src/util/ReactUtils';
+import Icon from 'react-native-vector-icons/Feather';
+
+
+interface DropProps {
+  value: boolean
+}
+
+const [value, setValue] = useState(null);
+const [items, setItems] = useState(null);
+let controller;
+
+export class Dropmenu extends React.Component{
+  controller: any;
+
+  constructor(props: DropProps) {
+    super(props);
+    this.state = {
+      value: null,
+      items: []
+    };
+
+    this.controller;
+  }
+
+  render() {
+
+    return (
+      <View>
+      <DropDownPicker
+        items={[
+          {label: 'Savings', value: 'savings'},
+          {label: 'Recreation', value: 'recreation'},
+          {label: 'Personal', value: 'personal'},
+          {label: 'Housing', value: 'housing'},
+          {label: 'Food', value: 'food'},
+          {label: 'Insurance', value: 'insurance'},
+          {label: 'Medical', value: 'medical'},
+          {label: 'Transport', value: 'transport'}
+        ]}
+        controller={instance => controller = instance}
+        onChangeList={(items, callback) => {
+            new Promise((resolve, reject) => resolve(setItems(items)))
+                .then(() => callback())
+                .catch(() => {});
+        }}
+
+        defaultValue={value}
+        onChangeItem={item => setValue(item.value)}
+      />
+    </View>
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import React, { useState } from "react";
 import styled from "styled-components";
 
 const Main = styled("div")`
@@ -79,4 +164,4 @@ export default function App() {
       </DropDownContainer>
     </Main>
   );
-}
+}*/
