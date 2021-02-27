@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { constructor } from 'react';
 import { StyleSheet, TextInput, Button } from 'react-native';
-import { Dropmenu } from '../components/Dropmenu';
+import Dropmenu from '../components/Dropmenu';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { MonoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
@@ -13,6 +13,7 @@ export default function TabTwoScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>My Finance</Text>
       <AmountSpent></AmountSpent>
+      <Dropmenu></Dropmenu>
       <Finalize></Finalize>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </View>
@@ -60,7 +61,7 @@ const ItemPurchased = () => {
 const Finalize = () => {
 return(
   <Button
-    onPress={() => console.log('this will log the purchase and deduct from the budget')}
+    onPress={() => console.log('this will log the purchase and deduct from the budget')} 
     title = 'Submit'
   />
 )
