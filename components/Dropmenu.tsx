@@ -14,8 +14,14 @@ interface DropProps {
   value: boolean
 }
 
-const [value, setValue] = useState(null);
-const [items, setItems] = useState(null);
+
+export default function app()
+{
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState(null);
+
+  return[setValue,setItems]
+}
 let controller;
 
 export class Dropmenu extends React.Component{
@@ -53,8 +59,8 @@ export class Dropmenu extends React.Component{
                 .catch(() => {});
         }}
 
-        defaultValue={value}
-        onChangeItem={item => setValue(item.value)}
+        //These 2 lines alone with line 56 are causing problems //defaultValue={value}
+        //I'm unsure how to make the state variables accesible from this scope //onChangeItem={item => setValue(item.value)}
       />
     </View>
     );
