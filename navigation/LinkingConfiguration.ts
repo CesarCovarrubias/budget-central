@@ -16,6 +16,11 @@ export default {
               TabTwoScreen: 'two',
             },
           },
+          SettingsTab: {
+            screens: {
+              SettingsScreen: 'settings',
+            },
+          },
         },
       },
       NotFound: '*',
