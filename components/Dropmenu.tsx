@@ -1,11 +1,6 @@
-//I installed "npm install react-native-dropdown-picker --save" & "npm install --save react-native-vector-icons" & "npm i --save-dev @types/react-native-vector-icons"
-//Git page: https://github.com/hossein-zare/react-native-dropdown-picker#readme
-
-
-import DropDownPicker from 'react-native-dropdown-picker';
-import { constructor, useState } from 'react';
-import { Text, View } from 'react-native';
+//npm install react-bootstrap bootstrap
 import * as React from 'react';
+<<<<<<< HEAD
 import { renderByOrder } from '../recharts/src/util/ReactUtils';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -169,5 +164,20 @@ export default function App() {
         ) : []}
       </DropDownContainer>
     </Main>
+=======
+import { useState } from 'react';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+
+export default function Dropmenu(){
+
+  return(
+    <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+    </DropdownButton>
+>>>>>>> 62cae2141e8c35d9244be27f57e306ee62e95cfc
   );
-}*/
+
+}

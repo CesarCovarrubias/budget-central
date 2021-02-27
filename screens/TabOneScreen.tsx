@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView, StyleSheet, TextInput, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
-import { Dropmenu } from '../components/Dropmenu';
+//import { Dropmenu } from '../components/Dropmenu';
 import EditScreenInfo from '../components/EditScreenInfo';
 import Categories from '../components/Categories';
 import { Text, View } from '../components/Themed';

@@ -1,16 +1,37 @@
 import * as React from 'react';
+<<<<<<< HEAD
 import { constructor, useState } from 'react';
 import { StyleSheet, TextInput, Button, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
 import { Dropmenu } from '../components/Dropmenu';
+=======
+import { constructor } from 'react';
+import { StyleSheet, TextInput, Button } from 'react-native';
+import Dropmenu from '../components/Dropmenu';
+>>>>>>> 62cae2141e8c35d9244be27f57e306ee62e95cfc
 import EditScreenInfo from '../components/EditScreenInfo';
 import { MonoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
 
 export default function TabTwoScreen() {
  
+<<<<<<< HEAD
   const [item, setItem] = useState<String>(" ");
   const [cost, setCost] = useState<Number>(0)
   const [category, setCategory] = useState<String>();
+=======
+  return (
+    //a lot of what is on this second screen is just for testing purposes
+    <View style={styles.container}>
+      <Text style={styles.title}>My Finance</Text>
+      <AmountSpent></AmountSpent>
+      <Dropmenu></Dropmenu>
+      <Finalize></Finalize>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+    </View>
+    
+  );
+}
+>>>>>>> 62cae2141e8c35d9244be27f57e306ee62e95cfc
 
   //-------------------------------------------------------
   const ItemPurchased = () => {
@@ -50,7 +71,17 @@ export default function TabTwoScreen() {
       />
     );
 
+<<<<<<< HEAD
   }
+=======
+const Finalize = () => {
+return(
+  <Button
+    onPress={() => console.log('this will log the purchase and deduct from the budget')} 
+    title = 'Submit'
+  />
+)
+>>>>>>> 62cae2141e8c35d9244be27f57e306ee62e95cfc
 
   const Finalize = () => {
     return (
