@@ -6,7 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { constructor, useState } from 'react';
 import { Text, View } from 'react-native';
 import * as React from 'react';
-import { renderByOrder } from '../recharts/src/util/ReactUtils';
+import { renderByOrder } from '../recharts/src/util/ReactUtils'; //throwing error on my end not sure why
 import Icon from 'react-native-vector-icons/Feather';
 
 
@@ -17,7 +17,7 @@ interface DropProps {
 
 export default function app()
 {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(null);// basically we need to find a way to make these variables accessible from any part of the code
   const [items, setItems] = useState(null);
 
   return[setValue,setItems]
