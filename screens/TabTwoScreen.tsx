@@ -60,7 +60,7 @@ export default function TabTwoScreen() {
         <AmountSpent></AmountSpent>
 
         <Button
-          onPress={() => adjustJSON()}
+          onPress={() => console.log(Dropmenu.getState())}
           title='Submit'
         />
       </view>
@@ -90,11 +90,8 @@ export default function TabTwoScreen() {
   return (
     //a lot of what is on this second screen is just for testing purposes
     <View style={styles.container}>
-      <Text>{cost}</Text>
-      <Text style={styles.title}>My Finance</Text>
-      <Finalize ></Finalize>
+      <Dropmenu></Dropmenu>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
     </View>
   );
 }
@@ -106,7 +103,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    
   },
   title: {
     fontSize: 20,
