@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView, StyleSheet, TextInput, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData, TextInputEndEditingEventData, TextInputChangeEventData } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import Categories from '../components/Categories';
@@ -89,9 +89,10 @@ export default function TabOneScreen() {
               keyboardType = {'numeric'}
               placeholder = {'0.00'}
               maxLength={15}
-              onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+              onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
                 setMoney(parseFloat(e.nativeEvent.text))
               }}
+              returnKeyType = {'done'}
             />
             <Button
             title={'Close Modal'}

@@ -74,7 +74,7 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'My Finance' }}
+        options={{ headerTitle: 'New Purchase' }}
       />
     </TabTwoStack.Navigator>
   );
