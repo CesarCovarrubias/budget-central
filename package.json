@@ -34,12 +34,14 @@
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-modal": "^11.6.1",
+    "react-native-paper": "^4.7.2",
     "react-native-picker-module": "^2.0.4",
     "react-native-popup-menu": "^0.15.10",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.0",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "^0.15.0",
+    "recharts": "^2.0.8",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {

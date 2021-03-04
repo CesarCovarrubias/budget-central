@@ -1,0 +1,93 @@
+[
+	{
+		"id": "0001",
+		"type": "Savings",
+		"savings":
+			{
+				"items":
+					[
+						{ "expense": "Check", "transaction": "542.63" },
+						{ "expense": "Check", "transaction": "652.32" },
+						{ "expense": "Check", "transaction": "498.25" },
+						{ "expense": "Check", "transaction": "512.55" }
+					]
+			}
+	},
+	{
+		"id": "0002",
+		"type": "Recreation",
+		"recreation":
+			{
+				"items":
+					[
+						{ "expense": "Fishing Rod", "transaction": "119.54" }
+					]
+			}
+	},
+	{
+		"id": "0003",
+		"type": "Personal",
+		"personal":
+			{
+				"items":
+					[
+						{ "expense": "Board Game", "transaction": "95.62" },
+						{ "expense": "Vinyl Record", "transaction": "34.52" }
+					]
+			}
+	},
+	{
+		"id": "0004",
+		"type": "Housing",
+		"housing":
+			{
+				"items":
+					[
+						{ "expense": "March Rent", "transaction": "460.00" }
+					]
+			}
+	},
+	{
+		"id": "0005",
+		"type": "Food",
+		"food":
+			{
+				"items":
+					[
+						{ "expense": "Starbucks", "transaction": "14.88" },
+						{ "expense": "Groceries", "transaction": "114.04" }
+					]
+			}
+	},
+	{
+		"id": "0006",
+		"type": "Insurance",
+		"insurance":
+			{
+				"items":
+					[
+					]
+			}
+	},
+	{
+		"id": "0007",
+		"type": "Medical",
+		"medical":
+			{
+				"items":
+					[
+					]
+			}
+	},
+	{
+		"id": "0008",
+		"type": "Transport",
+		"transport":
+			{
+				"items":
+					[
+						{ "expense": "Gas", "transaction": "40.22" }
+					]
+			}
+	}
+]

@@ -6,6 +6,10 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { MonoText } from '../components/StyledText';
 import { Text, View } from '../components/Themed';
 
+// Testing
+import Category from '../data/category.json'
+var dataTest = Category;
+
 export default function TabTwoScreen() {
  
   const [item, setItem] = useState<String>(" ");
@@ -54,7 +58,7 @@ export default function TabTwoScreen() {
 
   const Finalize = () => {
     return (
-      <view>
+      <View>
         <Dropmenu></Dropmenu>
         <ItemPurchased></ItemPurchased>
         <AmountSpent></AmountSpent>
@@ -63,7 +67,7 @@ export default function TabTwoScreen() {
           onPress={() => console.log(Dropmenu.getState())}
           title='Submit'
         />
-      </view>
+      </View>
     )
 
   }

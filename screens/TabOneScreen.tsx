@@ -2,17 +2,20 @@ import * as React from 'react';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView, StyleSheet, TextInput, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
+import { TextInput, SafeAreaView, StyleSheet, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
 import { Dropmenu } from '../components/Dropmenu';
 import EditScreenInfo from '../components/EditScreenInfo';
 import Categories from '../components/Categories';
 import { Text, View } from '../components/Themed';
 import Finance from '../components/Categories';
-import { constructor } from 'react';
+//import { constructor } from 'react';
 import TabTwoScreen from './TabTwoScreen';
 import Navigation from '../navigation';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
+// Testing
+import { ScrollView } from 'react-native-gesture-handler';
+import PaperList from '../components/PaperList'
 
 //nav stuff------------------------------------------------------------------
 //currently each time the project is saved
@@ -48,22 +51,21 @@ function monthlyIncome(){
 }
 
 export default function TabOneScreen() {
-
   const [ money, setMoney ] = useState<number>(0); 
   const [ showModal, setShowModal ] = useState<boolean>(false);
   const [ showTransaction, setShowTransaction ] = useState<boolean>(true);
 
   return (
     <SafeAreaView style={{ flex:1 }}>
-      <View style={styles.container}>
+      <ScrollView>
         <Text style={styles.title}>
-          {'Budget Main page'}
+          {'My Budget'}
         </Text>
-        <Text >
-          {'Your current income:  $ '+ money}
+        <Text style={styles.subtitle}>
+          {'Your current income: $'+ money}
         </Text>
         <Modal 
-          animationType={"slide"}  
+          animationType={"slide"} 
           transparent = {true}
           visible = {showModal}
           onRequestClose={() => {
@@ -71,10 +73,11 @@ export default function TabOneScreen() {
           }}
         >
           <View style={styles.modal}> 
-            <Text>
+            <Text style={styles.modaltitle}>
               {'Greetings, change your income here.'}
             </Text>
             <TextInput
+              style={styles.modaltext}
               keyboardType = {'numeric'}
               placeholder = {'0.00'}
               maxLength={15}
@@ -83,7 +86,7 @@ export default function TabOneScreen() {
               }}
             />
             <Button
-            title={'Close Modal'}
+            title={'Submit Income'}
             onPress={() => setShowModal(!showModal)}
             />
           </View>
@@ -96,8 +99,9 @@ export default function TabOneScreen() {
           title={'Recommended budget based on your income'}
           income={money}
         />
+        <PaperList/>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -118,9 +122,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9bf52',
     padding: 100,
   },
+  modaltitle: {
+    textAlign: 'center',
+    backgroundColor: '#f9bf52',
+    fontSize: 30,
+  },
+  modaltext: {
+    textAlign: 'center',
+    backgroundColor: '#ffffff',
+    width: '50%',
+    fontSize: 25,
+  },
   title: {
-    fontSize: 20,
+    fontSize: 27,
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 17,
+    textAlign: 'center',
   },
   separator: {
     marginVertical: 30,

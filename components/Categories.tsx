@@ -17,7 +17,7 @@ interface ItemProps {
 const Item = (props: ItemProps) => {
   return(
     <View style = {styles.border}>
-        <Text style={{textAlign:'left'}}>
+        <Text style={styles.items}>
           {props.catName} 
           {': $'+ props.budgetAmount}
         </Text>
@@ -27,11 +27,11 @@ const Item = (props: ItemProps) => {
 
 export default function Categories(props: CatProps) {
 
-  const renderItem = ({ item  }) => (
-    <Item  
-      catName={item.id}
-      budgetAmount={precision(item.multiplier * props.income) }
-    />
+  const renderItem = ({item}) => (
+      <Item  
+        catName={item.id}
+        budgetAmount={precision(item.multiplier * props.income) }
+      />
   );
 
   const precision = (number: any) => {
@@ -52,36 +52,40 @@ export default function Categories(props: CatProps) {
       <View style={styles.container}>
           <Text style={styles.title}>
               {props.title+'\n'}
-              {'----------------------------'}
+              {'----------------------------------------------------'}
           </Text>
-          <FlatList 
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={item=>item.id}
-            ItemSeparatorComponent={ () => Separator()}
-          />
+            <FlatList
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={item=>item.id}
+              ItemSeparatorComponent={ () => Separator()}
+            />
       </View>
   );
-} 
-
+}
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-start',
+      alignItems: 'center',
       justifyContent: 'center',
     },
     border: {
       textAlign : 'center',
-      width:  145, 
-      height:  20, 
+      width:  250, 
+      height:  33, 
       borderRadius: 5,
       backgroundColor : '#0cad9a',
     },
     title: {
-      fontSize: 14,
+      fontSize: 19,
       fontWeight: 'bold',
-      textAlign: 'left'
+      textAlign: 'center'
+    },
+    items: {
+      fontSize: 20,
+      textAlign: 'center',
+           
     },
     contentContainer: {
       paddingVertical: 20
@@ -92,4 +96,3 @@ const styles = StyleSheet.create({
       width: '80%',
     },
   });
-  
