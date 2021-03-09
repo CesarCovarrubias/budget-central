@@ -1,12 +1,38 @@
 // Testing
-import { List, Card } from 'react-native-paper';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { List } from 'react-native-paper';
+import { FlatList } from 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text } from 'react-native';
-import Category from '../data/category.json';
+import { View, StyleSheet } from 'react-native';
 
-var json = Category;
-//Object.entries(json)
+function getData(thisone: any) {
+    let testing: any[] = [];
+
+    var Datastore = require('react-native-local-mongodb')
+      , db = new Datastore({filename: 'storageKey', autoload: true})
+    
+    // docs is array with the results of the query
+    db.find({ category: thisone} , function (err: any, docs: any) {
+      if (err)
+        console.log(err)
+      else {
+        console.log('Load Succesful!')
+        //printing each result to console
+        for (var i = 0; i < docs.length; i++){
+          testing.push(docs[i]);
+        }
+      }
+    })
+    return testing;
+}
+
+var saveList = getData('Savings');
+var recreateList = getData('Recreation');
+var personalList = getData('Personal');
+var houseList = getData('Housing');
+var foodList = getData('Food');
+var insureList = getData('Insurance');
+var medList = getData('Medical');
+var transportList = getData('Transport');
 
 export default function PaperList() {
     const [expanded, setExpanded] = React.useState(true);
@@ -18,17 +44,13 @@ export default function PaperList() {
                 title="Savings"
                 left={props => <List.Icon {...props} icon="bank" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(saveList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].savings?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -38,17 +60,13 @@ export default function PaperList() {
                 title="Recreation"
                 left={props => <List.Icon {...props} icon="rv-truck" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(recreateList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].recreation?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -58,17 +76,13 @@ export default function PaperList() {
                 title="Personal"
                 left={props => <List.Icon {...props} icon="bag-personal" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(personalList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].personal?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -78,17 +92,13 @@ export default function PaperList() {
                 title="Housing"
                 left={props => <List.Icon {...props} icon="home" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(houseList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].housing?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -98,17 +108,13 @@ export default function PaperList() {
                 title="Food"
                 left={props => <List.Icon {...props} icon="food" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(foodList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].food?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -118,17 +124,13 @@ export default function PaperList() {
                 title="Insurance"
                 left={props => <List.Icon {...props} icon="card-account-details" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(insureList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].insurance?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -138,17 +140,13 @@ export default function PaperList() {
                 title="Medical"
                 left={props => <List.Icon {...props} icon="hospital-building" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(medList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].medical?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -158,17 +156,13 @@ export default function PaperList() {
                 title="Transport"
                 left={props => <List.Icon {...props} icon="car" />}>
                 <FlatList
-                    data={Object.entries(json)}
-                    renderItem={({ item, index }) => (
+                    data={Object.entries(transportList)}
+                    renderItem={({ item }) => (
                         <View>
-                            {item[1].transport?.items.map((v, i) => (
-                                <>
-                                    <List.Item
-                                    title={v.expense}
-                                    description={'$' + v.transaction}
-                                    />
-                                </>
-                            ))}
+                            <List.Item
+                            title={item[1].name}
+                            description={'$' + item[1].cost.toFixed(2)}
+                            />
                         </View>
                     )}
                 />
@@ -176,3 +170,9 @@ export default function PaperList() {
         </List.Section>
     );
 };
+
+const styles = StyleSheet.create({
+    title: {
+      fontSize: 10,
+    },
+});

@@ -13,9 +13,9 @@ import TabTwoScreen from './TabTwoScreen';
 import Navigation from '../navigation';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
-// Testing
 import { ScrollView } from 'react-native-gesture-handler';
 import PaperList from '../components/PaperList'
+import PaperFAB from '../components/PaperFloatingButton'
 
 //nav stuff------------------------------------------------------------------
 //currently each time the project is saved
@@ -102,6 +102,7 @@ export default function TabOneScreen() {
         <PaperList/>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       </ScrollView>
+      <PaperFAB/>
     </SafeAreaView>
   );
 }
@@ -146,5 +147,11 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 });
