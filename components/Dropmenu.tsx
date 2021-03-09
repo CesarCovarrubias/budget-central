@@ -1,147 +1,177 @@
 //I installed "npm install react-native-dropdown-picker --save" & "npm install --save react-native-vector-icons" & "npm i --save-dev @types/react-native-vector-icons"
 //Git page: https://github.com/hossein-zare/react-native-dropdown-picker#readme
 
-
 import DropDownPicker from 'react-native-dropdown-picker';
-import { constructor, useState } from 'react';
-import { Button, NativeSyntheticEvent, Text, TextInput, TextInputSubmitEditingEventData, View } from 'react-native';
+import {  Button, 
+          NativeSyntheticEvent, 
+          Text, 
+          TextInput, 
+          TextInputSubmitEditingEventData, 
+          View,
+          StyleSheet } from 'react-native';
 import * as React from 'react';
-import { renderByOrder } from '../recharts/src/util/ReactUtils'; //throwing error on my end not sure why
 import Icon from 'react-native-vector-icons/Feather';
 
-
+// if we pass props to dropmenu, give the variable types here.
 interface DropProps {
-  value: boolean
-}
-
-
-export default function app()
-{
-  const [value, setValue] = useState(null);// basically we need to find a way to make these variables accessible from any part of the code
-  const [items, setItems] = useState(null);
-
-  return[setValue,setItems]
-}
-let controller;
-
-export class Dropmenu extends React.Component{
   
-  item:String;
-  cost:Number;
-  cat:String;
+}
 
-  controller: any;
-  static getState: any;
-
+// typing for our state variables
+interface DropState {
+  category: String
+  name: String
+  cost: number
+}
+                                          // this makes typescript happy...
+export class Dropmenu extends React.Component<DropProps, DropState>{
+  
   constructor(props: DropProps) {
     super(props);
     this.state = {
-      category: null,
-      items: [],
+      category: '',
+      name: '',
+      cost: 0,
     };
+  }
 
+  componentDidMount() {
+    var Datastore = require('react-native-local-mongodb')
+      , db = new Datastore({filename: 'storageKey', autoload: true})
+  }
+
+  // theres probably a better way than to create a new db object each
+  // time but this works so meh
+  saveData() {
+    var Datastore = require('react-native-local-mongodb')
+      , db = new Datastore({filename: 'storageKey', autoload: true});
     
-    this.item = " ";
-    this.cat = " ";
-    this.cost = 0;
-    this.controller;
+    // the 3 fields for each transaction
+    var doc = {
+      category: this.state.category,
+      name: this.state.name,
+      cost: this.state.cost
+    }
+
+    db.insert(doc, function(err, newDoc){
+      if (err)
+        console.log(err)
+      else
+        console.log('Save Successful!')
+    })
+  }
+  // printData() is for testing. reads all entries in db. 
+  printData() {
+    var Datastore = require('react-native-local-mongodb')
+      , db = new Datastore({filename: 'storageKey', autoload: true})
+    
+    // docs is array with the results of the query
+    db.find({}, function (err, docs) {
+      if (err)
+        console.log(err)
+      else {
+        console.log('Load Succesful!')
+        //printing each result to console
+        for (var i = 0; i < docs.length; i++){
+          console.log(docs[i])
+        }
+      }
+    })
   }
 
   render() {
 
     return (
       <View>
-        <Text style = {{
-          fontSize: 20,
-          fontWeight: 'bold',
-          fontStyle: "normal",
-          textDecorationLine: "underline", 
-        }}>Category</Text>
-      <DropDownPicker
-        items={[
-          {label: 'Savings', value: 'savings'},
-          {label: 'Recreation', value: 'recreation'},
-          {label: 'Personal', value: 'personal'},
-          {label: 'Housing', value: 'housing'},
-          {label: 'Food', value: 'food'},
-          {label: 'Insurance', value: 'insurance'},
-          {label: 'Medical', value: 'medical'},
-          {label: 'Transport', value: 'transport'}
-        ]}
-        containerStyle = {{
-          height: 50,
-          width: 250,
-          margin: 20,
-        }}
-        controller={instance => controller = instance}
-        onChangeList={(items, callback) => {
-            new Promise((resolve, reject) => resolve(setItems(items)))
-                .then(() => callback())
-                .catch(() => {});
-        }}
 
-        //These 2 lines alone with line 56 are causing problems //defaultValue={value}
-        onChangeItem ={item =>this.setState({}) }
-      />
+        {/* Dropdown menu */}
+        <Text style = {styles.catHeader}> 
+          Category
+        </Text>
+        <DropDownPicker
+          containerStyle = {styles.containerStyle}
+          items={[
+            {label: 'Savings', value: 'savings'},
+            {label: 'Recreation', value: 'recreation'},
+            {label: 'Personal', value: 'personal'},
+            {label: 'Housing', value: 'housing'},
+            {label: 'Food', value: 'food'},
+            {label: 'Insurance', value: 'insurance'},
+            {label: 'Medical', value: 'medical'},
+            {label: 'Transport', value: 'transport'}
+          ]}
+          onChangeItem ={item => {this.setState({category: item.label})} }
+        />
 
+        {/* Expense name input field */}
+        <Text style = {styles.smallHeader}>
+          Expense
+        </Text>
+        <TextInput
+          style={styles.inputText}
+          placeholder = "Purchase"
+          placeholderTextColor = "#808080"
+          onChange={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+            this.setState({name: e.nativeEvent.text })
+          }}
+        />
 
-  <Text style = {{
-    fontWeight: 'bold',
-    fontStyle: "normal",
-    textDecorationLine: "underline", 
-    }}>
-      Expense</Text>
-  <TextInput
-    //ITEM
-    style={{
-      margin:20,
-      height: 30,
-      borderColor: 'gray',
-      borderWidth: 1,
-      paddingLeft:5,
-    }}
-    placeholder = "Purchase"
-    placeholderTextColor = "#808080"
-    onChange={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
-     this.item = e.nativeEvent.text
-    }}
-  />
-
-
-
-<Text style = {{
-  fontWeight: 'bold',
-  fontStyle: "normal",
-  textDecorationLine: "underline", 
-}}>
-  Cost
-</Text>
-<TextInput
-//COST
-style={{
-  margin: 20,
-  height: 30,
-  borderColor: 'gray',
-  borderWidth: 1,
-  paddingLeft:5,
-}}
-keyboardType={'numeric'}
-placeholder = "$ 0.00"
-placeholderTextColor = "#808080"
-onChange={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => this.cost = parseInt(e.nativeEvent.text)}
-/>
-
-<Button
-
-          onPress={() => console.log(this.cost)}//In the end, do json stuff
+        {/* Cost input field */}
+        <Text style = {styles.smallHeader}>
+          Cost
+        </Text>
+        <TextInput
+          style={styles.inputText}
+          keyboardType={'numeric'}
+          placeholder = "$ 0.00"
+          placeholderTextColor = "#808080"
+          onChange={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+            this.setState({cost : parseFloat(e.nativeEvent.text)})
+          }}
+        />
+        
+        {/* Save button. Writes transaction information to db */}
+        <Button
+          onPress={() => 
+            console.log(this.state.category,
+            this.state.name,
+            this.state.cost,
+            this.saveData())}
           title='Submit'
         />
+
+        {/* This button is for testing the db*/}
+        <Button onPress = {() => this.printData()} title = 'load (test)' />
     </View>
     );
   }
 }
 
-
+const styles = StyleSheet.create ({
+  catHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontStyle: "normal",
+    textDecorationLine: "underline",
+  },
+  smallHeader: {
+    fontWeight: 'bold',
+    fontStyle: "normal",
+    textDecorationLine: "underline",
+  },
+  inputText: {
+    margin: 20,
+    height: 30,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingLeft:5,
+  },
+  containerStyle: {
+    height: 50,
+    width: 250,
+    margin: 20,
+  }
+})
 
 
 
