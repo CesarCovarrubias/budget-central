@@ -13,7 +13,7 @@ import Finance from '../components/Categories';
 import TabTwoScreen from './TabTwoScreen';
 import Navigation from '../navigation';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import SettingsScreen from './SettingsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 import { ScrollView } from 'react-native-gesture-handler';
 import PaperList from '../components/PaperList'
@@ -57,15 +57,18 @@ function monthlyIncome(){
   }
 }
 
-export default function TabOneScreen() {
+export default function TabOneScreen({ route }) {
   const [ money, setMoney ] = useState<number>(0); 
   const [ showModal, setShowModal ] = useState<boolean>(false);
   const [ showTransaction, setShowTransaction ] = useState<boolean>(true);
+
+  const [currency, changeCurrency] = useState<String>(route.params);
 
   const handleTransaction = () => {
     //create Transaction component and pass props:
     //onClick, transaction number
   }
+
   
   return (
     <SafeAreaView style={{ flex:1 }}>
@@ -74,7 +77,7 @@ export default function TabOneScreen() {
           {'My Budget'}
         </Text>
         <Text style={styles.subtitle}>
-          {'Your current income: $'+ money}
+          {'Your current income: ' + currency + money}
         </Text>
         <Modal 
           animationType={"slide"} 
@@ -91,7 +94,7 @@ export default function TabOneScreen() {
             <TextInput
               style={styles.modaltext}
               keyboardType = {'numeric'}
-              placeholder = {'0.00'}
+              placeholder = {currency + '0.00'}
               maxLength={15}
               onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
                 setMoney(parseFloat(e.nativeEvent.text))

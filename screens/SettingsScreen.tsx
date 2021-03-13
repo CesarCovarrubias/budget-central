@@ -1,4 +1,7 @@
 import * as React from 'react';
+import * as Redux from '@reduxjs/toolkit';
+
+import {configureStore} from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,15 +12,13 @@ import TabTwoScreen from './TabTwoScreen';
 import { KeyboardAvoidingView, NativeSyntheticEvent, SafeAreaView, StyleSheet, TextInputChangeEventData, TextInputEndEditingEventData } from 'react-native';
 import { Switch, TextInput } from 'react-native-gesture-handler';
 
-export default function SettingsScreen() {
+export default function SettingsScreen(  ) {
 
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [symbCurrency, setCurrency] = useState<String>("$");
 
     return (
-
-
 
         <SafeAreaView style={{ flex: 1 }}>
 
@@ -36,6 +37,7 @@ export default function SettingsScreen() {
                         maxLength={3}
                         onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
                             setCurrency(e.nativeEvent.text)
+                            
                         }}
                         returnKeyType={'done'}
                         allowFontScaling={true}

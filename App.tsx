@@ -6,6 +6,12 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
+import TabOneScreen from './screens/TabOneScreen';
+import SettingsScreen from './screens/SettingsScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+
+//const Stack = createStackNavigator();
+
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
