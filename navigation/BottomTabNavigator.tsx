@@ -7,7 +7,8 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import SettingsScreen from '../screens/SettingsScreen';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, SettingsParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -30,6 +31,13 @@ export default function BottomTabNavigator() {
         component={TabTwoNavigator}
         options={{
           title: 'My Finance', tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
+        component={SettingsScreenNavigator}
+        options={{
+          title: 'Settings', tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -69,5 +77,19 @@ function TabTwoNavigator() {
         options={{ headerTitle: 'New Purchase' }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const SettingsScreenStack = createStackNavigator<SettingsParamList>();
+
+function SettingsScreenNavigator() {
+  return (
+    <SettingsScreenStack.Navigator>
+      <SettingsScreenStack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{ headerTitle: 'Settings' }}
+      />
+    </SettingsScreenStack.Navigator>
   );
 }
