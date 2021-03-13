@@ -8,7 +8,8 @@ import {  Button,
           TextInput, 
           TextInputSubmitEditingEventData, 
           View,
-          StyleSheet } from 'react-native';
+          StyleSheet, 
+          TextInputChangeEventData} from 'react-native';
 import * as React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -111,9 +112,10 @@ export class Dropmenu extends React.Component<DropProps, DropState>{
           style={styles.inputText}
           placeholder = "Purchase"
           placeholderTextColor = "#808080"
-          onChange={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+          onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
             this.setState({name: e.nativeEvent.text })
           }}
+          returnKeyType = 'done'
         />
 
         {/* Cost input field */}
@@ -125,9 +127,10 @@ export class Dropmenu extends React.Component<DropProps, DropState>{
           keyboardType={'numeric'}
           placeholder = "$ 0.00"
           placeholderTextColor = "#808080"
-          onChange={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+          onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
             this.setState({cost : parseFloat(e.nativeEvent.text)})
           }}
+          returnKeyType = 'done'
         />
         
         {/* Save button. Writes transaction information to db */}

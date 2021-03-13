@@ -2,8 +2,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TextInput, SafeAreaView, StyleSheet, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
 import { Dropmenu } from '../components/Dropmenu';
+import { SafeAreaView, StyleSheet, TextInput, Button, Modal, NativeSyntheticEvent, TextInputSubmitEditingEventData, TextInputEndEditingEventData, TextInputChangeEventData } from 'react-native';
+
 import EditScreenInfo from '../components/EditScreenInfo';
 import Categories from '../components/Categories';
 import { Text, View } from '../components/Themed';
@@ -12,6 +13,7 @@ import Finance from '../components/Categories';
 import TabTwoScreen from './TabTwoScreen';
 import Navigation from '../navigation';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import SettingsScreen from './SettingsScreen';
 
 import { ScrollView } from 'react-native-gesture-handler';
 import PaperList from '../components/PaperList'
@@ -30,7 +32,12 @@ const MyStack = () => {
           name="Home"
           component={TabOneScreen}
         />
-        <Stack.Screen name="Profile" component={TabTwoScreen} />
+        <Stack.Screen 
+          name="Profile" 
+          component={TabTwoScreen} />
+        <Stack.Screen 
+          name="Settings" 
+          component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -43,7 +50,7 @@ function monthlyIncome(){
   //not perfect as this isnt how pay periods always work but its a start
   let date : Date = new Date()
   let day = date.getDate()
-  if (day % 9 === 0 ? day > 7: [])
+  if (day % 9 == 0 && day > 7)
   {
     console.log('Its pay day')
     //this will eventually add to/recalculate the budget every 7 days
@@ -55,6 +62,11 @@ export default function TabOneScreen() {
   const [ showModal, setShowModal ] = useState<boolean>(false);
   const [ showTransaction, setShowTransaction ] = useState<boolean>(true);
 
+  const handleTransaction = () => {
+    //create Transaction component and pass props:
+    //onClick, transaction number
+  }
+  
   return (
     <SafeAreaView style={{ flex:1 }}>
       <ScrollView>
@@ -81,9 +93,10 @@ export default function TabOneScreen() {
               keyboardType = {'numeric'}
               placeholder = {'0.00'}
               maxLength={15}
-              onSubmitEditing={(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => {
+              onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
                 setMoney(parseFloat(e.nativeEvent.text))
               }}
+              returnKeyType = {'done'}
             />
             <Button
             title={'Submit Income'}
@@ -92,11 +105,11 @@ export default function TabOneScreen() {
           </View>
         </Modal>
         <Button 
-          title={'Change Income'}
+          title={'Change Income/Open Modal'}
           onPress={() => setShowModal(!showModal)}
         />
         <Categories 
-          title={'Recommended budget based on your income'}
+          title={'Budgeting Categories'}
           income={money}
         />
         <PaperList/>
@@ -120,7 +133,7 @@ const styles = StyleSheet.create({
   modal: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#f9bf52',
+    backgroundColor: '#D3D3D3',
     padding: 100,
   },
   modaltitle: {
